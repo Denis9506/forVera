@@ -117,6 +117,32 @@
     event.preventDefault();
   }, { passive: false });
 
+  let touchStartY = 0;
+  let touchEndY = 0;
+  
+  document.addEventListener("touchstart", function (event) {
+    touchStartY = event.touches[0].clientY;
+  }, { passive: true });
+  
+  document.addEventListener("touchend", function (event) {
+    touchEndY = event.changedTouches[0].clientY;
+    handleSwipe();
+  }, { passive: true });
+  
+  function handleSwipe() {
+    const threshold = 50; 
+    const deltaY = touchStartY - touchEndY;
+  
+    if (Math.abs(deltaY) > threshold) {
+      if (deltaY > 0) {
+        changeSection(1); 
+      } else {
+        changeSection(-1); 
+      }
+    }
+  }
+  
+
 window.addEventListener("DOMContentLoaded", () => {
     sections[0].classList.add("active");
   });
