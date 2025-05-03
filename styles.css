@@ -1,0 +1,285 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+    overflow: hidden;
+  }
+  
+  .section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #section1 {
+    background: url('img/background.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+  }
+  
+  .center-text h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #fff;
+    background-color: rgba(252, 119, 154, 0.712);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+  }
+  
+  #section2 {
+    background-color: #fce4ec;
+    flex-direction: column;
+  }
+  
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    max-height: 94vh; 
+    overflow-y: auto;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .photo {
+    flex: 1 0 30%;
+    max-width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    
+  }
+  
+  .photo img {
+  width: 200px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid #a5d6a7;
+}
+
+.photo-modal-content img {
+  max-width: 90vw;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+.photo-modal-content .nav-button {
+  position: static;
+  transform: none;
+  margin: 0 1rem;
+}
+  
+  .photo:hover {
+    transform: scale(1.05);
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal.show {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: #f8bbd0;
+    border: 2px solid #a5d6a7;
+    padding: 1rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  .photo-modal-content img {
+    max-width: 90vw;
+    max-height: 60vh;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+  }
+  
+  button {
+    background-color: #8bb58c;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    margin-top: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.6s ease, color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #81c784;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.95); }
+  }
+  
+  .modal.fade-out .modal-content {
+    animation: fadeOut 0.5s forwards;
+  }
+  
+  .secret-button {
+    position: fixed;
+    bottom: 10px;
+    right: 115px;
+    background-color: rgba(252, 119, 154, 0.712);
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #ec407a;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 0.5;
+  }
+  
+  .secret-button:hover {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .center-text h1 {
+      font-size: 2.5rem;
+      padding: 1rem;
+    }
+  }
+  
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(252, 119, 154, 0.712);
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 5;
+  }
+  
+  .nav-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .photo-modal-content {
+    position: relative;
+  }
+  #photoText {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  
+  .fade {
+    animation: fadePhoto 0.5s ease-in-out;
+  }
+  
+  @keyframes fadePhoto {
+    from { opacity: 0.3; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .section {
+    opacity: 0;
+    transition: opacity 1s ease, transform 1s ease;
+    pointer-events: none;
+  }
+  
+  .section.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+  }
+  .secret-code-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  #copyOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+  pink{
+    background-color: rgba(252, 119, 154, 0.712);
+  }
+  #copyOverlay.show {
+    opacity: 0.3;
+  }
+
+  .flower {
+  position: absolute;
+  bottom: 0;
+  width: 120px;
+  opacity: 0;
+  animation: fadeInUp 2s ease forwards;
+  z-index: 2;
+}
+
+.flower-left {
+  left: 0px;
+  animation-delay: 0.5s;
+}
+
+.flower-right {
+  right: 0px;
+  animation-delay: 1s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#section2 {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+

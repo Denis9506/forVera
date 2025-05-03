@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>С Днём Рождения!</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="modal show" id="birthdayModal">
+  <div class="modal-content animate">
+    <h2>🎉 С  днём рождения, любимая! 🎉</h2>
+    <p>Ты — самое светлое, что есть в моей жизни. Желаю тебе счастья, радости и волшебства каждый день 💖</p>
+    <p>Пролистай страницу вниз и не забудь найти код для получения подарка!</p>
+    <button onclick="closeModal('birthdayModal')">Спасибо ❤️</button>
+  </div>
+</div>
+
+<div class="modal" id="secretModal">
+    <div class="modal-content animate">
+      <h2>🌸 Секретное послание 🌸</h2>
+      <p>Ты не просто прекрасна — ты чудо, о котором я мечтал всю жизнь. <br>Спасибо, что ты есть 💚</p>
+      <p>Я сделал этот сайт-поздраление о тебе и для тебя! От твоего Дениски!</p>
+      <p class="secret-code-row">
+        <span id="secretCode">Секретный код: <pink>I_WANT_A_GIFT_FROM_YOU</pink></span>
+        <button onclick="copyCode()" class="copy-button" title="Скопировать код">📋</button>
+      </p>
+      <button onclick="closeModal('secretModal')">Закрыть</button>
+    </div>
+  </div>
+  
+  <div id="copyOverlay"></div>
+
+<button class="secret-button" onclick="openModal('secretModal')">💌</button>
+
+<div class="section" id="section1">
+  <div class="center-text">
+    <h1>С днём рождения моя дорогая!</h1>
+  </div>
+</div>
+
+<div class="section" id="section2">
+  <div class="gallery" id="galleryContainer"></div>
+  <img src="img/flower-left.png" class="flower flower-left" alt="Цветок слева">
+  <img src="img/flower-right.png" class="flower flower-right" alt="Цветок справа">
+</div>
+
+<div class="modal" id="photoModal">
+    <div class="modal-content photo-modal-content animate" id="photoModalContent">
+        <img id="largePhoto" src="" alt="Большое фото" />
+        <p id="photoText"></p>
+        <div class="nav-button-container">
+          <button class="nav-button left" onclick="changePhoto(-1)">←</button>
+          <button class="nav-button right" onclick="changePhoto(1)">→</button>
+        </div>
+        <button onclick="closeModal('photoModal')">Закрыть</button>
+      </div>
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
