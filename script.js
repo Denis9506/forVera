@@ -82,6 +82,13 @@
       .catch(err => alert("Ошибка при копировании"));
   }
   
+  document.addEventListener("wheel", function (event) {
+    const direction = event.deltaY > 0 ? 1 : -1;
+    scrollBySection(direction);
+    event.preventDefault();
+  }, { passive: false });
+
+  
   document.addEventListener('wheel', function (event) {
     const scrollY = window.scrollY;
     const sectionHeight = window.innerHeight;
@@ -97,51 +104,55 @@
 
 
   let currentSection = 0;
-  const sections = document.querySelectorAll(".section");
-  
-  function changeSection(direction) {
-    const newIndex = currentSection + direction;
-    if (newIndex < 0 || newIndex >= sections.length) return;
-  
-    sections[currentSection].classList.remove("active");
-    sections[newIndex].classList.add("active");
-    currentSection = newIndex;
-  }
-  
-  document.addEventListener("wheel", function (event) {
-    if (event.deltaY > 0) {
-      changeSection(1);
-    } else {
-      changeSection(-1);
-    }
-    event.preventDefault();
-  }, { passive: false });
+const sections = document.querySelectorAll(".section");
 
-  let touchStartY = 0;
-  let touchEndY = 0;
-  
-  document.addEventListener("touchstart", function (event) {
-    touchStartY = event.touches[0].clientY;
-  }, { passive: true });
-  
-  document.addEventListener("touchend", function (event) {
-    touchEndY = event.changedTouches[0].clientY;
-    handleSwipe();
-  }, { passive: true });
-  
-  function handleSwipe() {
-    const threshold = 50; 
-    const deltaY = touchStartY - touchEndY;
-  
-    if (Math.abs(deltaY) > threshold) {
-      if (deltaY > 0) {
-        changeSection(1); 
-      } else {
-        changeSection(-1); 
-      }
+function scrollBySection(direction) {
+  const newIndex = currentSection + direction;
+  const sectionHeight = window.innerHeight;
+  if (newIndex < 0 || newIndex >= sections.length) return;
+  if (direction > 0) {
+    window.scrollTo({ top: 0 + sectionHeight, behavior: 'smooth' });
+  } else {
+    window.scrollTo({ top: 0 - sectionHeight, behavior: 'smooth' });
+  }
+  sections[currentSection].classList.remove("active");
+  sections[newIndex].classList.add("active");
+  currentSection = newIndex;
+}
+
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.addEventListener("touchstart", (event) => {
+  if (event.target.closest(".photo")) {
+    return; 
+  }
+
+  touchStartY = event.changedTouches[0].clientY;
+}, { passive: true });
+
+document.addEventListener("touchend", (event) => {
+
+  if (event.target.closest(".photo")) {
+    return;
+  }
+
+  touchEndY = event.changedTouches[0].clientY;
+  handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+  const swipeThreshold = 50; 
+
+  const deltaY = touchStartY - touchEndY;
+  if (Math.abs(deltaY) > swipeThreshold) {
+    if (deltaY > 0) {
+      scrollBySection(1);
+    } else {
+      scrollBySection(-1);
     }
   }
-  
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     sections[0].classList.add("active");
